@@ -1,0 +1,33 @@
+{
+  "name": "@surendranb/ai-crawler-radar",
+  "version": "0.1.0",
+  "description": "Autonomous AI Search, Training & Agent Crawler Diagnostic Engine",
+  "main": "bin/index.js",
+  "bin": {
+    "ai-crawler-radar": "./bin/index.js",
+    "ai-crawler-radar-mcp": "./bin/index.js"
+  },
+  "files": [
+    "bin/index.js"
+  ],
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-crawler",
+    "robots-txt",
+    "llms-txt",
+    "turnstile",
+    "cloudflare-radar",
+    "searchgpt",
+    "perplexity"
+  ],
+  "author": "Surendran B <reachsuren@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surendranb/ai-crawler-radar.git"
+  }
+}

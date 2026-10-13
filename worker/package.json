@@ -1,0 +1,11 @@
+{
+  "name": "ai-crawler-radar-gateway",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker Edge Gateway for ai-crawler-radar MCP & Telemetry",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  }
+}
