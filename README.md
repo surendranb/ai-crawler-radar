@@ -8,39 +8,71 @@
 > **Autonomous AI Search, Training & Agent Crawler Diagnostic Engine.**  
 > Probes live web pages with authentic AI bot signatures, audits `robots.txt` across 3 tiers, identifies WAF hard-blocks & Turnstile challenges, calculates token bloat multipliers, and validates `/llms.txt`.
 
-**Zero API keys. Zero cloud dependencies. 100% Local-first probe execution.**
+Available in **two architectural deployment variants** designed for maximum flexibility and privacy:
+1. **Local MCP (stdio)**: Zero-auth, runs on your machine via `uvx` / `npx`, cold boot < 50ms.
+2. **Remote MCP (Streamable HTTP / SSE)**: Hosted edge gateway (`https://crawler.builditwithai.xyz/mcp`) delivering continuous tool, schema, prompt, and playbook updates without needing PyPI/NPM package upgrades. Data never leaves your computer; zero cloud compute burden.
 
 ---
 
-## 🚀 Quick Start
+## ⚡ 1-Line Universal Installer
 
-### ⚡ Option 1: Universal 1-Line Installer
+Automatically detects and configures all installed AI agent harnesses (Claude Desktop, Cursor, Claude Code, Antigravity, OpenCode, Zed, Windsurf):
+
 ```bash
 curl -fsSL https://crawler.builditwithai.xyz/install | bash
 ```
 
-### 🐍 Option 2: Run via Python (`uvx`)
-```bash
-# Launch interactive MCP stdio server
-uvx ai-crawler-radar
+---
 
-# Or run CLI directly
-uvx ai-crawler-radar probe https://example.com
-uvx ai-crawler-radar audit stripe.com
+## 🛠️ MCP Configuration: Choose Your Variant
+
+### Variant A: Remote MCP (Streamable HTTP / SSE)
+> **Recommended for instant edge updates**: Tools, schemas, prompts, and operational playbooks update dynamically at the edge without requiring package reinstallations or PyPI/NPM updates. Zero cloud compute burden; data never leaves your computer.
+
+#### 🤖 Claude Desktop / Claude Code
+Add to `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "ai-crawler-radar": {
+      "url": "https://crawler.builditwithai.xyz/mcp"
+    }
+  }
+}
 ```
 
-### 📦 Option 3: Run via Node (`npx`)
-```bash
-npx @surendranb/ai-crawler-radar probe https://example.com
+#### 💻 Cursor / Windsurf / Antigravity
+Add to your IDE MCP settings:
+```json
+{
+  "mcpServers": {
+    "ai-crawler-radar": {
+      "url": "https://crawler.builditwithai.xyz/mcp"
+    }
+  }
+}
+```
+
+#### 🌐 OpenCode
+Add to `opencode.jsonc`:
+```jsonc
+{
+  "mcp": {
+    "ai-crawler-radar": {
+      "type": "remote",
+      "url": "https://crawler.builditwithai.xyz/mcp",
+      "enabled": true
+    }
+  }
+}
 ```
 
 ---
 
-## 🛠️ Model Context Protocol (MCP) Setup
+### Variant B: Local MCP (stdio)
+> **Recommended for offline / air-gapped environments**: Runs natively on your machine via Python (`uvx`) or Node (`npx`). Zero dependencies, cold boot < 50ms.
 
-Add `ai-crawler-radar` directly to your favorite agent harness:
-
-### 🤖 Claude Desktop / Claude Code
+#### 🤖 Claude Desktop / Claude Code
 Add to `claude_desktop_config.json`:
 ```json
 {
@@ -53,8 +85,8 @@ Add to `claude_desktop_config.json`:
 }
 ```
 
-### 💻 Cursor / Windsurf / Antigravity / OpenCode
-Add to your IDE MCP configuration:
+#### 💻 Cursor / Windsurf / Antigravity
+Add to your IDE MCP settings:
 ```json
 {
   "mcpServers": {
@@ -66,22 +98,39 @@ Add to your IDE MCP configuration:
 }
 ```
 
+#### 🌐 OpenCode
+Add to `opencode.jsonc`:
+```jsonc
+{
+  "mcp": {
+    "ai-crawler-radar": {
+      "type": "local",
+      "command": ["uvx", "ai-crawler-radar"],
+      "enabled": true
+    }
+  }
+}
+```
+
+*(Node.js users can substitute `uvx ai-crawler-radar` with `npx -y @surendranb/ai-crawler-radar`)*
+
 ---
 
 ## 🧭 The 3-Tier AI Bot Model
 
-`ai-crawler-radar` evaluates crawler posture across three distinct operational tiers:
+`ai-crawler-radar` categorizes and evaluates crawler access across three distinct operational tiers:
 
-| Tier | Primary Crawlers | Strategic Purpose | Typical Recommendation |
+| Tier | Primary Crawlers | Strategic Purpose | Typical Posture |
 | :--- | :--- | :--- | :--- |
-| **Tier 1: Model Pre-Training** | `GPTBot`, `ClaudeBot`, `Google-Extended`, `Meta-ExternalAgent`, `Bytespider`, `CCBot` | Bulk offline data harvesting to pre-train foundation models | Block if protecting proprietary intellectual property |
+| **Tier 1: Model Pre-Training** | `GPTBot`, `ClaudeBot`, `Google-Extended`, `Meta-ExternalAgent`, `Bytespider`, `CCBot` | Bulk offline data harvesting to train foundation models | Block if protecting proprietary intellectual property |
 | **Tier 2: AI Search Indexing** | `OAI-SearchBot`, `PerplexityBot`, `Claude-SearchBot`, `Applebot`, `Bingbot` | Real-time indexing to power SearchGPT, Perplexity & Siri citations | **Allow** to drive citations and conversational discovery |
 | **Tier 3: Live User Fetchers** | `ChatGPT-User`, `Claude-User`, `Perplexity-User` | Real-time URL fetching triggered by an active human chat prompt | **Allow** for link previews and interactive agent assistance |
 
 ---
 
-## 📡 Available MCP Tools
+## 📡 Available Tools & Prompts
 
+### Tools
 | Tool Name | Parameters | Description |
 | :--- | :--- | :--- |
 | `probe_url` | `url`, `tier`, `check_markdown_twin` | Probes URL using authentic headers across bot tiers; diagnoses WAF hard-blocks, Turnstile challenges, CSR empty shells, and token bloat multipliers. |
@@ -91,6 +140,11 @@ Add to your IDE MCP configuration:
 | `generate_llms_txt` | `domain` | Validates existing `/llms.txt` against CommonMark V2 standard, or generates a compliant starter specification. |
 | `skill_read` | `skill_name` | Read bundled operational playbooks dynamically. |
 | `skills_list` | *(none)* | List available operational skills. |
+
+### Dynamic Prompts (Remote Variant)
+- `audit_domain_ai_posture`: Comprehensive 3-tier crawler readiness and robots.txt audit.
+- `diagnose_crawler_block`: Root-cause investigation into WAF, Turnstile, or CSR blocks.
+- `generate_llms_specification`: Automated generation of CommonMark V2 `/llms.txt` and `/llms-full.txt`.
 
 ---
 
@@ -129,7 +183,7 @@ ai-crawler-radar probe https://example.com --json
 
 ## 🔒 Telemetry & Privacy
 
-All network probing, token parsing, and analysis executes **locally on your machine**. 
+Data never leaves your computer. In both local and remote variants, private target data is never stored on external servers.
 
 To opt out of anonymous usage telemetry:
 ```bash
