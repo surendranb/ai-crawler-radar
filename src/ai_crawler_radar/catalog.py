@@ -12,8 +12,36 @@ _CACHED_BOTS: Optional[List[Dict[str, Any]]] = None
 _CACHED_CATEGORIES: Optional[List[str]] = None
 
 
+_SUPPLEMENTARY_AI_BOTS = [
+    {
+        "slug": "perplexitybot",
+        "name": "PerplexityBot",
+        "kind": "BOT",
+        "operator": "Perplexity AI",
+        "operatorUrl": "https://docs.perplexity.ai/docs/perplexitybot",
+        "category": "AI_SEARCH",
+        "description": "PerplexityBot is used to index pages and provide sources and citations for Perplexity AI conversational answers.",
+        "userAgentPatterns": ["PerplexityBot"],
+        "userAgents": ["Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; PerplexityBot/1.0; +https://docs.perplexity.ai/docs/perplexitybot"],
+        "signatureAgentUrl": "https://docs.perplexity.ai/docs/perplexitybot",
+    },
+    {
+        "slug": "perplexity-user",
+        "name": "Perplexity-User",
+        "kind": "BOT",
+        "operator": "Perplexity AI",
+        "operatorUrl": "https://docs.perplexity.ai",
+        "category": "AI_ASSISTANT",
+        "description": "Perplexity-User fetches real-time links when requested directly by a user in Perplexity search queries.",
+        "userAgentPatterns": ["Perplexity-User"],
+        "userAgents": ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 (compatible; Perplexity-User/1.0; +https://docs.perplexity.ai)"],
+        "signatureAgentUrl": "https://docs.perplexity.ai",
+    },
+]
+
+
 def load_bot_directory() -> List[Dict[str, Any]]:
-    """Loads and caches the 758 verified bots from Cloudflare Radar dataset."""
+    """Loads and caches verified bots from Cloudflare Radar dataset plus frontier AI additions."""
     global _CACHED_BOTS, _CACHED_CATEGORIES
     if _CACHED_BOTS is not None:
         return _CACHED_BOTS
@@ -23,6 +51,12 @@ def load_bot_directory() -> List[Dict[str, Any]]:
 
     with open(_DATA_FILE, "r", encoding="utf-8") as f:
         bots = json.load(f)
+
+    # Merge supplementary bots if not already present by slug
+    existing_slugs = {b.get("slug") for b in bots}
+    for supp in _SUPPLEMENTARY_AI_BOTS:
+        if supp["slug"] not in existing_slugs:
+            bots.append(supp)
 
     _CACHED_BOTS = bots
     cats = sorted({b.get("category") for b in bots if b.get("category")})

@@ -12,9 +12,9 @@ from ai_crawler_radar.catalog import (
 
 
 def test_bot_directory_loading():
-    """Verify that the embedded Cloudflare Radar bot directory contains exactly 758 verified bots."""
+    """Verify that the bot directory contains the 758 Cloudflare Radar bots plus frontier additions."""
     bots = load_bot_directory()
-    assert len(bots) == 758, f"Expected 758 verified bots, found {len(bots)}"
+    assert len(bots) >= 758, f"Expected at least 758 verified bots, found {len(bots)}"
     sample = bots[0]
     assert "slug" in sample
     assert "name" in sample
@@ -44,6 +44,11 @@ def test_search_bots_by_query():
     assert len(anthropic_bots) >= 2
     a_names = [b["name"] for b in anthropic_bots]
     assert any("Claude" in n for n in a_names)
+
+    perplexity_bots = search_bots(query="perplexity")
+    assert len(perplexity_bots) >= 1
+    p_names = [b["name"] for b in perplexity_bots]
+    assert any("Perplexity" in n for n in p_names)
 
 
 def test_search_bots_by_category():
