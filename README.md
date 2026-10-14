@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/surendranb/ai-crawler-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/surendranb/ai-crawler-radar/actions)
 [![PyPI version](https://img.shields.io/pypi/v/ai-crawler-radar.svg?style=flat-square&color=blue)](https://pypi.org/project/ai-crawler-radar/)
-[![NPM version](https://img.shields.io/npm/v/@surendranb/ai-crawler-radar.svg?style=flat-square&color=green)](https://www.npmjs.com/package/@surendranb/ai-crawler-radar)
+[![NPM version](https://img.shields.io/npm/v/ai-crawler-radar.svg?style=flat-square&color=green)](https://www.npmjs.com/package/ai-crawler-radar)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 
 > **Autonomous AI Search, Training & Agent Crawler Diagnostic Engine.**  
@@ -112,7 +112,7 @@ Add to `opencode.jsonc`:
 }
 ```
 
-*(Node.js users can substitute `uvx ai-crawler-radar` with `npx -y @surendranb/ai-crawler-radar`)*
+*(Node.js users can substitute `uvx ai-crawler-radar` with `npx -y ai-crawler-radar`)*
 
 ---
 

@@ -48,7 +48,7 @@ if [ "$HAS_UVX" = true ]; then
 elif [ "$HAS_NPX" = true ]; then
   echo -e "  ${GREEN}✔${NC} Runtime : ${BOLD}npx detected${NC}"
   CHOSEN_COMMAND="npx"
-  CHOSEN_ARGS='["-y", "@surendranb/ai-crawler-radar"]'
+  CHOSEN_ARGS='["-y", "ai-crawler-radar"]'
 else
   echo -e "  ${YELLOW}⚠${NC} Runtime : Neither uvx nor npx detected in PATH. Please install Astral uv: https://docs.astral.sh/uv/"
 fi

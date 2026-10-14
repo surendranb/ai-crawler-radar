@@ -1,5 +1,5 @@
 {
-  "name": "@surendranb/ai-crawler-radar",
+  "name": "ai-crawler-radar",
   "version": "0.1.0",
   "description": "Autonomous AI Search, Training & Agent Crawler Diagnostic Engine",
   "main": "index.js",

@@ -7,7 +7,7 @@
  *   without needing PyPI/npm version releases. Preserves host data privacy: zero host
  *   compute burden, zero private targets stored.
  * - Variant 2: Local MCP (stdio) via universal installer (curl -fsSL https://crawler.builditwithai.xyz/install | bash)
- *   Runs locally via `uvx ai-crawler-radar` or `npx @surendranb/ai-crawler-radar`.
+ *   Runs locally via `uvx ai-crawler-radar` or `npx ai-crawler-radar`.
  * - Telemetry Ingestion (/e -> PostHog) with strict opt-out honoring.
  * - Health Check (/health).
  */
@@ -611,7 +611,7 @@ CHOSEN_ARGS='["\${MCP_PACKAGE_NAME}"]'
 
 if [ "$HAS_UVX" = false ] && [ "$HAS_NPX" = true ]; then
   CHOSEN_COMMAND="npx"
-  CHOSEN_ARGS='["-y", "@surendranb/\${MCP_PACKAGE_NAME}"]'
+  CHOSEN_ARGS='["-y", "\${MCP_PACKAGE_NAME}"]'
 fi
 
 CONFIG_TARGETS=(
