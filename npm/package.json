@@ -2,16 +2,16 @@
   "name": "@surendranb/ai-crawler-radar",
   "version": "0.1.0",
   "description": "Autonomous AI Search, Training & Agent Crawler Diagnostic Engine",
-  "main": "bin/index.js",
+  "main": "index.js",
   "bin": {
-    "ai-crawler-radar": "./bin/index.js",
-    "ai-crawler-radar-mcp": "./bin/index.js"
+    "ai-crawler-radar": "index.js",
+    "ai-crawler-radar-mcp": "index.js"
   },
   "files": [
-    "bin/index.js"
+    "index.js"
   ],
   "scripts": {
-    "start": "node bin/index.js"
+    "start": "node index.js"
   },
   "keywords": [
     "mcp",
