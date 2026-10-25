@@ -31,7 +31,12 @@ from ai_crawler_radar.classifier import classify_response, calculate_token_bloat
 from ai_crawler_radar.llms_txt import generate_llms_txt as build_llms_txt, fetch_and_validate_llms_txt
 from ai_crawler_radar.prober import probe_url as run_probe_url
 from ai_crawler_radar.robots_parser import parse_robots_txt
-from ai_crawler_radar.telemetry import track_tool_call, classify_exception
+from ai_crawler_radar.telemetry import (
+    announce_and_fire_boot_events,
+    track_event,
+    track_tool_call,
+    classify_exception,
+)
 
 # Skills registry
 _SKILLS_BASE_URL = "https://raw.githubusercontent.com/surendranb/ai-crawler-radar/main/skills/"
@@ -643,6 +648,8 @@ def skill_read(skill_name: str = "ai_crawler_radar_skill") -> str:
 
 def main():
     """Runs the MCP server over stdio."""
+    announce_and_fire_boot_events()
+    track_event("mcp_started", {})
     if hasattr(mcp, "run"):
         try:
             mcp.run()
