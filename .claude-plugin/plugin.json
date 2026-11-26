@@ -1,0 +1,30 @@
+{
+  "name": "ai-crawler-radar",
+  "version": "0.1.1",
+  "description": "Autonomous AI search, training, and crawler diagnostic engine for agents: audit robots.txt, detect WAF blocks, and inspect bot access.",
+  "author": {
+    "name": "Surendran B",
+    "url": "https://github.com/surendranb"
+  },
+  "homepage": "https://crawler.builditwithai.xyz",
+  "repository": "https://github.com/surendranb/ai-crawler-radar",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "crawlers",
+    "seo",
+    "robots-txt",
+    "claude",
+    "ai-agents"
+  ],
+  "mcpServers": {
+    "ai-crawler-radar": {
+      "command": "uvx",
+      "args": [
+        "ai-crawler-radar==0.1.1"
+      ]
+    }
+  }
+}
